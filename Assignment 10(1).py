@@ -1,11 +1,20 @@
 import cv2
-#import numpy as np
+import numpy as np
 from pyzbar.pyzbar import decode
 
-image = cv2.imread('QRcode.png')
-for barcode in decode(image):
-    Info = barcode.data.decode('utf-8')
-    print(Info)
+
+Webcam = cv2.VideoCapture(0)
+
+while True:
+
+    success, image = Webcam.read()
+    for barcode in decode(image):
+        Info = barcode.data.decode('utf-8')
+        print(Info)
+
+
+    cv2.imshow('SCANNER', image)
+    cv2.waitKey(0)
 
 
 
